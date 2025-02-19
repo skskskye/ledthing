@@ -7,15 +7,22 @@
 
 class Renderer{
   public:
-    const int rows = 6;
-    const int col = 6;
-    const int numbPixels = 6;
+    int rows = 6;
+    int col = 6;
+    int numbPixels = 6;
+    int ledStatus[6][6] = {{0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0},
+                      {0, 0, 0, 0, 0, 0}
+    };
     int x;
     int y;
     Adafruit_NeoPixel row1, row2, row3, row4, row5, row6;
     Renderer(int pin1, int pin2, int pin3, int pin4, int pin5, int pin6);
     void clear();
-    void initialize();
+    void initalize();
     void setPixelGrid(int x, int y, bool toggle);
     void createShape(int x, int y, int sizeX, int sizeY);
     bool checkPixelOn(int x, int y);
