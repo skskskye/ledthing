@@ -10,7 +10,7 @@ void Button::initalize(){
 }
 
 bool Button::getButtonState(){
-  Serial.println(pin);
-  return digitalRead(pin) == LOW;
+  
+  return digitalRead(pin) == HIGH;
   
 }
