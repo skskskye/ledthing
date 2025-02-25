@@ -12,11 +12,11 @@ class Paddle{
     bool upPressed = false;
     bool downPressed = false;
 
-    Button upButton;
-    Button downButton;
-    Renderer render;
+    Button& upButton;
+    Button& downButton;
+    Renderer& render;
 
-    Paddle(Button upButton, Button downButton, Renderer render, int x);
+    Paddle(Button& upButton, Button& downButton, Renderer& render, int x);
 
     void movePaddle();
     bool paddleCollision();
