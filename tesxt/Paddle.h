@@ -7,18 +7,15 @@
 class Paddle{
   public:
     int x;
-    int y;
+    int y = 0;
 
-    bool upPressed = false;
-    bool downPressed = false;
+    // Button& upButton;
+    // Button& downButton;
+    // Renderer& render;
 
-    Button& upButton;
-    Button& downButton;
-    Renderer& render;
+    Paddle(int x);
 
-    Paddle(Button& upButton, Button& downButton, Renderer& render, int x);
-
-    void movePaddle();
+    void movePaddle(bool upButton, bool downButton, Renderer& render);
     bool paddleCollision();
 };
 

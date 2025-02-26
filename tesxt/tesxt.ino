@@ -1,5 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #include "Button.h"
+#include "Paddle.h"
 #include "Renderer.h"
 
 #define ROW1_PIN 7
@@ -18,11 +19,15 @@ Button button4(11);
 
 Renderer render(ROW1_PIN, ROW2_PIN, ROW3_PIN, ROW4_PIN, ROW5_PIN, ROW6_PIN);
 
+Paddle paddle1(0);
+Paddle paddle2(5);
+
 void setup() { 
   button1.initalize();
   button2.initalize();
   button3.initalize();
   button4.initalize();
+
   
   render.initalize();
 
@@ -30,21 +35,9 @@ void setup() {
 
 }
 
-int y = 0;
-
 void loop() {
-  
-  render.createShape(0, y, 1, 3);
-
-
-
-
-  render.sendPixels(); //end of all logic, we are SENDING IT TO ITTT
-  delay(250);
-
-}                           
-                            
-
-
-
-
+  paddle1.movePaddle(button3.getButtonState(), button4.getButtonState(), render);
+  paddle2.movePaddle(button1.getButtonState(), button2.getButtonState(), render);
+  render.sendPixels(); 
+  delay(50);
+}

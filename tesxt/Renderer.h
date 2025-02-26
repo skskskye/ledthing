@@ -22,12 +22,14 @@ class Renderer{
     Adafruit_NeoPixel row1, row2, row3, row4, row5, row6;
     Renderer(int pin1, int pin2, int pin3, int pin4, int pin5, int pin6);
     void clear();
+    void clearByCol(int col);
     void initalize();
     void setPixelGrid(int x, int y, bool toggle);
     void createShape(int x, int y, int sizeX, int sizeY);
     bool checkPixelOn(int x, int y);
     void fill();
     void sendPixels();
+
 
 
 

@@ -3,9 +3,27 @@
 #include "Button.h"
 #include "Renderer.h"
 
-Paddle::Paddle(Button& upButton, Button& downButton, Renderer& render, int x){
-  this->upButton = upButton;
-  this->downButton = downButton;
-  this->render = render;
+Paddle::Paddle(int x){
   this->x = x;
+}
+
+void Paddle::movePaddle(bool upButton, bool downButton, Renderer& render){
+    if(upButton){
+      y++;
+      if(y > 3){
+          y = 3;
+      }else{
+        render.clearByCol(x);
+      }
+    }else if(downButton){
+      y--;
+      Serial.println(y);
+      if(y < 0){
+        y = 0;
+      }else{
+        render.clearByCol(x);
+      }
+    }
+  
+  render.createShape(x, y, 1, 3);
 }

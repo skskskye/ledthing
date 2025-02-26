@@ -122,11 +122,17 @@ void Renderer::sendPixels(){
   row6.show();
 }
 
+void Renderer::clearByCol(int c){
+  for(int r = 0; r < rows; r++){
+    ledStatus[r][c] = 0;     
+  }                             
+  sendPixels();
+}
 
 void Renderer::clear(){
   for(int r = 0; r < rows; r++){
     for(int c = 0; c < col; c++){
-      ledStatus[r][c] = 0;  
+      ledStatus[r][c] = 0;
     }                       
   }                             
   sendPixels();     
