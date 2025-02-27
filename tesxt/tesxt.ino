@@ -2,6 +2,7 @@
 #include "Button.h"
 #include "Paddle.h"
 #include "Renderer.h"
+#include "Ball.h"
 
 #define ROW1_PIN 7
 #define ROW2_PIN 2
@@ -21,6 +22,7 @@ Renderer render(ROW1_PIN, ROW2_PIN, ROW3_PIN, ROW4_PIN, ROW5_PIN, ROW6_PIN);
 
 Paddle paddle1(0);
 Paddle paddle2(5);
+Ball ball;
 
 void setup() { 
   button1.initalize();
@@ -38,6 +40,7 @@ void setup() {
 void loop() {
   paddle1.movePaddle(button3.getButtonState(), button4.getButtonState(), render);
   paddle2.movePaddle(button1.getButtonState(), button2.getButtonState(), render);
+  ball.tick(render, paddle1, paddle2);
   render.sendPixels(); 
   delay(50);
 }

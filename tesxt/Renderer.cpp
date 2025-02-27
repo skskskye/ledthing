@@ -63,35 +63,35 @@ void Renderer::sendPixels(){
       switch(r){
         case 0:
           if(checkPixelOn(c, r)){
-            row1.setPixelColor(c, row1.Color(255, 255, 255));
+            row1.setPixelColor(c, row1.Color(20, 20, 20));
           }else{
             row1.setPixelColor(c, row1.Color(0, 0, 0));
           }
           break;
         case 1:
           if(checkPixelOn(c, r)){
-            row2.setPixelColor(c, row2.Color(255, 255, 255));
+            row2.setPixelColor(c, row2.Color(20, 20, 20));
           }else{
             row2.setPixelColor(c, row2.Color(0, 0, 0));
           }
           break;
         case 2:
           if(checkPixelOn(c, r)){
-            row3.setPixelColor(c, row3.Color(255, 255, 255));
+            row3.setPixelColor(c, row3.Color(20, 20, 20));
           }else{
             row3.setPixelColor(c, row3.Color(0, 0, 0));
           }
           break;
         case 3:
           if(checkPixelOn(c, r)){
-            row4.setPixelColor(c, row4.Color(255, 255, 255));
+            row4.setPixelColor(c, row4.Color(20, 20, 20));
           }else{
             row4.setPixelColor(c, row4.Color(0, 0, 0));
           }
           break;
         case 4: 
           if(checkPixelOn(c, r)){
-            row5.setPixelColor(c, row5.Color(255, 255, 255));
+            row5.setPixelColor(c, row5.Color(20, 20, 20));
           }else{
             row5.setPixelColor(c, row5.Color(0, 0, 0));
           }
@@ -99,7 +99,7 @@ void Renderer::sendPixels(){
 
         case 5: 
           if(checkPixelOn(c, r)){
-            row6.setPixelColor(c, row6.Color(255, 255, 255));
+            row6.setPixelColor(c, row6.Color(20, 20, 20));
           }else{
             row6.setPixelColor(c, row6.Color(0, 0, 0));
           }
