@@ -42,5 +42,5 @@ void loop() {
   paddle2.movePaddle(button1.getButtonState(), button2.getButtonState(), render);
   ball.tick(render, paddle1, paddle2);
   render.sendPixels(); 
-  delay(50);
+  delay(500);
 }

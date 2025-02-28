@@ -9,7 +9,7 @@ class Ball{
     int y = 2;
 
     int veloX = 1;
-    int veloY = 1;
+    int veloY = -1;
 
     void tick(Renderer& render, Paddle& p1, Paddle& p2);
     void reset(Renderer& render);
