@@ -13,8 +13,6 @@ void Ball::tick(Renderer& render, Paddle& p1, Paddle& p2){
   //wall collision
   if((newY > render.rows - 1 || newY < 0)){ //checking if we hit a wall
     if(!hit){ // weird edge case to see if we hit a paddle, fixed some weird bug doing this, fixed something 
-
-      
       veloY = -veloY; //making our ball move the opposite y direction when hitting wall
       newY = y + veloY; //our new position added with our bounce
     }
@@ -41,9 +39,21 @@ void Ball::tick(Renderer& render, Paddle& p1, Paddle& p2){
       p2.increaseScore();
     }
 
+    srand(millis()); //setting seed with our current time
+
     //reset the ball velo, with random chance which direction it goes
-    veloY = (rand() % 1) - 1;
-    veloX = (rand() % 1) + 1;
+    veloY = (rand() % 3) - 1;
+    veloX = (rand() % 3) - 1;
+
+    //forcefully checking if we got a random value we cant use
+    if(veloX == 0){
+      veloX = 1;
+    }
+
+    //same check but on y
+    if(veloY == 0){
+      veloY = 1;
+    }
 
     //reseting the position
     newX = render.col / 2;

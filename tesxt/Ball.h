@@ -10,7 +10,6 @@ class Ball{ //our ball class
     int x = 5; 
     int y = 2;
 
-    
     //ball velocity
     int veloX = 1;
     int veloY = -1;

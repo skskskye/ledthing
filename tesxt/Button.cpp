@@ -10,7 +10,5 @@ void Button::initalize(){
 }
 
 bool Button::getButtonState(){
-  //Serial.println(analogRead(pin)); 
   return analogRead(pin) >= 750; //simply returning the state of the button
-  
 }

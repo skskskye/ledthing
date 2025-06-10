@@ -19,7 +19,6 @@ class LedRow{ //class
     void initialize(); //initialize 
     void showRow(); //show the row
     void setLed(int index, int value); //set led 
-    //void setColour(int index, int r, int g, int b); 
     void setRow(int value); //set a whole row to one value
     int getSize(); //size of our array
     int* getRowStatus(); //returning our led array

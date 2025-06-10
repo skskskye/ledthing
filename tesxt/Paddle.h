@@ -16,8 +16,8 @@ class Paddle{ //class
 
     Paddle(int x); //initalizing paddle 
 
-    void movePaddle(bool upButton, bool downButton, Renderer& render); 
-    void increaseScore();
+    void movePaddle(bool upButton, bool downButton, Renderer& render); //moving paddle function
+    void increaseScore(); //increase score function
 };
 
 #endif  // BALL_H

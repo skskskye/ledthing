@@ -100,11 +100,12 @@ void loop() {
   int player1Score = paddle1.score;
   int player2Score = paddle2.score;
 
-  //Serial.println(player1Score);
+  //showing led lights for player 1
   for(int player1 = 1; player1 <= player1Score; player1++){
     scoreRow.setLed(player1, 1);
   }
 
+  //showing led lights for player 2
   for(int player2 = 1; player2 <= player2Score; player2++){
     scoreRow.setLed(paddle2.x - player2, 1);
   }
@@ -119,8 +120,10 @@ void loop() {
     paddle1.score = 0;
     paddle2.score = 0;
 
+    delay(1000);
+
     scoreRow.setRow(0);
   }
 
-  delay(500); //delay refresh rate
+  delay(250); //delay refresh rate
 }
