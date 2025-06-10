@@ -4,19 +4,20 @@
 #include "Renderer.h"
 
 
-class Paddle{
-  public:
+class Paddle{ //class
+  public: //public vars
+
+    //paddle position
     int x;
-    int y = 0;
+    int y = 0; //value 
+    
+    //score for the paddle
+    int score = 0;
 
-    // Button& upButton;
-    // Button& downButton;
-    // Renderer& render;
+    Paddle(int x); //initalizing paddle 
 
-    Paddle(int x);
-
-    void movePaddle(bool upButton, bool downButton, Renderer& render);
-    bool paddleCollision();
+    void movePaddle(bool upButton, bool downButton, Renderer& render); 
+    void increaseScore();
 };
 
 #endif  // BALL_H

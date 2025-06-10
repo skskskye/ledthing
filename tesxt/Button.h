@@ -2,8 +2,8 @@
 #define BUTTON_H
 
 
-class Button{
-  public:
+class Button{ //button class
+  public: //all our public var
     int pin;
     Button(int pin);  // Constructor declaration
     void initalize();  // Method to initialize the button pin

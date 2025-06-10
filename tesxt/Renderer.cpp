@@ -1,37 +1,51 @@
 #include "Renderer.h"
 #include <Adafruit_NeoPixel.h>
 #include "Arduino.h"
+#include "LedRow.h"
 
+//renderer creation, with all needed params 
+Renderer::Renderer(int rows, int col, LedRow* inputArr[]){
+    this->rows = rows;
+    this->col = col;
+    this->ledRows = new LedRow*[rows];
 
-
-Renderer::Renderer(int pin1, int pin2, int pin3, int pin4, int pin5, int pin6)
-  : row1(numbPixels, pin1, NEO_GRB + NEO_KHZ800), 
-    row2(numbPixels, pin2, NEO_GRB + NEO_KHZ800), 
-    row3(numbPixels, pin3, NEO_GRB + NEO_KHZ800), 
-    row4(numbPixels, pin4, NEO_GRB + NEO_KHZ800), 
-    row5(numbPixels, pin5, NEO_GRB + NEO_KHZ800), 
-    row6(numbPixels, pin6, NEO_GRB + NEO_KHZ800) {
-    // Additional initialization if needed
+     for(int r = 0; r < rows; r++){
+       this->ledRows[r] = inputArr[r];
+     }
+    
+    // additonal rows if need be
 }
 
 
-void Renderer::initalize(){
-  row1.begin();
-  row2.begin();
-  row3.begin();
-  row4.begin();
-  row5.begin();
-  row6.begin();
+
+//initalizing 
+void Renderer::initialize(){ 
+  for(int r = 0; r < rows; r++){
+    LedRow* currentRow = ledRows[r];
+    currentRow->initialize();
+  }
 }
 
+//set the position in the grid to on or off
 void Renderer::setPixelGrid(int x, int y, bool toggle){
-    if(toggle){
-      ledStatus[y][x] = 1;
-    }else{
-      ledStatus[y][x] = 0;
+  if(toggle){
+    ledStatus[y][x] = 1;
+  }else{
+    ledStatus[y][x] = 0;
+  }
+}
+
+//set grid based off led row object
+void Renderer::setGrid(){ 
+  for(int r = 0; r < rows; r++){ //looping through all elements
+    LedRow* currentRow = ledRows[r]; //currnet led row, assigned to value at our ledrow array
+    for(int c = 0; c < col; c++){
+      ledStatus[r][c] = currentRow->getLedStatus(c); //making our matrix the same as the current row attributes
     }
   }
+}
 
+//creating any kind of square, with any kind of size
 void Renderer::createShape(int x, int y, int sizeX, int sizeY){
   for(int r = 0; r < sizeY; r++){
     for(int c = 0; c < sizeX; c++){
@@ -40,6 +54,7 @@ void Renderer::createShape(int x, int y, int sizeX, int sizeY){
   }
 }
 
+//checking if a LED is on in the grid
 bool Renderer::checkPixelOn(int x, int y){
   if(ledStatus[y][x] == 0){
     return false;
@@ -48,6 +63,7 @@ bool Renderer::checkPixelOn(int x, int y){
   }
 }
 
+//filling the grid with ON
 void Renderer::fill(){
   for(int i = 0; i < rows; i++){
     for(int j = 0; j < col; j++){
@@ -56,80 +72,24 @@ void Renderer::fill(){
   }
 }
 
-
+//sending pixels to the leds
 void Renderer::sendPixels(){
   for(int r = 0; r < rows; r++){
     for(int c = 0; c < col; c++){
-      switch(r){
-        case 0:
-          if(checkPixelOn(c, r)){
-            row1.setPixelColor(c, row1.Color(20, 20, 20));
-          }else{
-            row1.setPixelColor(c, row1.Color(0, 0, 0));
-          }
-          break;
-        case 1:
-          if(checkPixelOn(c, r)){
-            row2.setPixelColor(c, row2.Color(20, 20, 20));
-          }else{
-            row2.setPixelColor(c, row2.Color(0, 0, 0));
-          }
-          break;
-        case 2:
-          if(checkPixelOn(c, r)){
-            row3.setPixelColor(c, row3.Color(20, 20, 20));
-          }else{
-            row3.setPixelColor(c, row3.Color(0, 0, 0));
-          }
-          break;
-        case 3:
-          if(checkPixelOn(c, r)){
-            row4.setPixelColor(c, row4.Color(20, 20, 20));
-          }else{
-            row4.setPixelColor(c, row4.Color(0, 0, 0));
-          }
-          break;
-        case 4: 
-          if(checkPixelOn(c, r)){
-            row5.setPixelColor(c, row5.Color(20, 20, 20));
-          }else{
-            row5.setPixelColor(c, row5.Color(0, 0, 0));
-          }
-          break;
-
-        case 5: 
-          if(checkPixelOn(c, r)){
-            row6.setPixelColor(c, row6.Color(20, 20, 20));
-          }else{
-            row6.setPixelColor(c, row6.Color(0, 0, 0));
-          }
-          break;
-
-        default:
-          Serial.println("error");
-          break;
-      }
-      Serial.print(ledStatus[r][c]);
+      ledRows[r]->setLed(c, ledStatus[r][c]); //setting led in the led row to current state of our matrix
     }
-    Serial.println("");
+    ledRows[r]->showRow(); //showing the row
   }
-  Serial.println("---");
-  row1.show();
-  row2.show();
-  row3.show();
-  row4.show();
-  row5.show();
-  row6.show();
 }
 
-void Renderer::clearByCol(int c){
+void Renderer::clearByCol(int c){ //clearing led grid based of the column 
   for(int r = 0; r < rows; r++){
     ledStatus[r][c] = 0;     
   }                             
   sendPixels();
 }
 
-void Renderer::clear(){
+void Renderer::clear(){ //clearing our led grid
   for(int r = 0; r < rows; r++){
     for(int c = 0; c < col; c++){
       ledStatus[r][c] = 0;
@@ -138,7 +98,16 @@ void Renderer::clear(){
   sendPixels();     
 }
 
-
+void Renderer::showGrid(){
+  for(int r = 0; r < rows; r++){
+    for(int c = 0; c < col; c++){
+      Serial.print(ledStatus[r][c]);
+      Serial.print(" ");
+    }
+    Serial.println("");
+  }
+  Serial.println("=========================");
+}
 
 
 

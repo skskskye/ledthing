@@ -2,40 +2,27 @@
 #define RENDERER_H
 
 #include <Adafruit_NeoPixel.h>
-
+#include "LedRow.h"
 
 
 class Renderer{
   public:
-    int rows = 6;
-    int col = 6;
-    int numbPixels = 6;
-    int ledStatus[6][6] = {{0, 0, 0, 0, 0, 0},
-                      {0, 0, 0, 0, 0, 0},
-                      {0, 0, 0, 0, 0, 0},
-                      {0, 0, 0, 0, 0, 0},
-                      {0, 0, 0, 0, 0, 0},
-                      {0, 0, 0, 0, 0, 0}
-    };
-    int x;
-    int y;
-    Adafruit_NeoPixel row1, row2, row3, row4, row5, row6;
-    Renderer(int pin1, int pin2, int pin3, int pin4, int pin5, int pin6);
-    void clear();
-    void clearByCol(int col);
-    void initalize();
-    void setPixelGrid(int x, int y, bool toggle);
-    void createShape(int x, int y, int sizeX, int sizeY);
-    bool checkPixelOn(int x, int y);
-    void fill();
-    void sendPixels();
+    int rows; //amount of rows
+    int col; //amount of cols
 
-
-
-
-    
-    
-
+    int ledStatus[8][12] = {0}; //led matrix  **will make it dynamic later if i have time**  
+    LedRow** ledRows;
+    Renderer(int rows, int cols, LedRow* ledRows[]); //creating our renderer
+    void setGrid();
+    void clear(); //clear the matrix
+    void clearByCol(int col); //clear matrix at a column
+    void initialize(); //initializing our matrix
+    void setPixelGrid(int x, int y, bool toggle); //set a pixel in our matrix
+    void createShape(int x, int y, int sizeX, int sizeY); //creating a shape in our matrix
+    bool checkPixelOn(int x, int y); //checking when if a led is on in our matrix
+    void fill(); //fill the matrix
+    void sendPixels(); //sending out grid states to LEDs
+    void showGrid(); //show grid to console
 };
 
 #endif  // RENDERER_H
