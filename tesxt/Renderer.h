@@ -11,9 +11,9 @@ class Renderer{
     int col; //amount of cols
 
     int ledStatus[8][12] = {0}; //led matrix  **will make it dynamic later if i have time**  
-    LedRow** ledRows;
+    LedRow** ledRows; //empty pointer to point to the object, which points to the array
     Renderer(int rows, int cols, LedRow* ledRows[]); //creating our renderer
-    void setGrid();
+    void setGrid(); //set the grid
     void clear(); //clear the matrix
     void clearByCol(int col); //clear matrix at a column
     void initialize(); //initializing our matrix

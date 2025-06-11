@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #include "LedRow.h"
 
-//renderer creation, with all needed params 
+//creates the rendering engine
 Renderer::Renderer(int rows, int col, LedRow* inputArr[]){
     this->rows = rows;
     this->col = col;
@@ -63,7 +63,7 @@ bool Renderer::checkPixelOn(int x, int y){
   }
 }
 
-//filling the grid with ON
+//filling the grid with ON LEDs
 void Renderer::fill(){
   for(int i = 0; i < rows; i++){
     for(int j = 0; j < col; j++){
@@ -82,7 +82,8 @@ void Renderer::sendPixels(){
   }
 }
 
-void Renderer::clearByCol(int c){ //clearing led grid based of the column 
+//clearing led grid based of the column 
+void Renderer::clearByCol(int c){ 
   for(int r = 0; r < rows; r++){
     ledStatus[r][c] = 0;     
   }                             
